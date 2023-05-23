@@ -1,0 +1,116 @@
+### Java容器
+
+###### 除了Map结尾的类，其他所有的java集合类都实现了collection接口
+
+- ###### list、set、map三种集合类的区别
+
+  - list存储的元素是有序的，可以重复
+  - set存储的元素是无序的，不可以重复
+  - map，使用键值对进行存储，key不可重复，value可以重复，key和value都是无序的
+
+- ###### 集合框架底层的数据结构
+
+  - **List**
+    - ArrayList 底层数据结构为数组
+    - vector object[]数组
+    - linkedList 底层数据结构为双向链表(1.6之前为循环链表)
+  - **Set**
+    - HashSet 无序、唯一，基于HashMap实现，底层是用HashMap来保存元素的
+    - LinkedHashSet: LInkedHashSet 是hashset的子类，并且内部是通过LInkedHashMap来实现的
+    - TreeSet: 有序、唯一，底层数据结构是红黑树
+  - **Map:**
+    - HashMap: JDK8之前由数组+链表组成，数组是HashMap的主体，链表则主要是为了解决哈希冲突而存在的，JDK8以后在解决哈希冲突时有个较大改变，当链表长度大于阈值(阈值默认为8)时，(在链表转换为红黑树之前，会判断链表长度是否小于64，如果小于64则会进行数组扩容，而不是转换为红黑树)就会将链表转换为红黑树,以减少搜索时间
+    - LinkedHashMap: LinkedHashMap继承自HashMap,所以他的底层仍然是基于拉链式散列结构，即由数组和链表或者红黑树组成，另外，LlinkedHashMap在上面结构的基础上，增加了一跳双向链表，使得上面的结构可以保持键值对的插入顺序，同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。
+    - HashTable： 数组+链表组成的，数组是hashMap的主体，链表则主要是为了解决哈希冲突存在的。
+    - TreeMap：红黑树（自平衡的排序二叉树）
+
+- ###### 如何选用集合
+
+  - 主要根据自己的使用需求，比如如果需要使用键值对数据就使用Map下的接口，如果不需要排序就试用treeMap，不需要排序就用HashMap,如果需要线程安全就使用ConcurrentHashMap。其他集合使用也按照这个逻辑选择即可。
+
+- ###### 为什么要使用集合
+
+  - 当我们需要保存一组类型相同的数据时，我们应该是使用一个容器来保存，并且数据的类型是多种多样的，为了存储各种各样类型的数据，所以就出现了容器——集合。
+
+- ###### Collection子接口——LIst
+
+  - ###### Arraylist 和 Vector 的区别?
+
+    - ArrayList是List的主要实现类，底层使用Object[]数组实现，查询速度快，但是增删操作慢、线程不安全
+    - Vector是List的古老实现类，底层同样是Object[]数组，但线程安全
+
+  - ###### ArrayList和LinkedList的区别
+
+    - 是否线程安全？
+
+      ArrayList和LinkedList都是不同步的，线程不安全
+
+    - 底层数据结构
+
+      ArrayList是Object[]数组，LinkedList是双向链表，JDK1.6之前是循环链表，注意双向链表和双向循环链表的区别
+
+    - 插入和删除是否受元素位置的影响:
+
+      - ArrayList
+
+        采用数组存储，所以插入和删除元素的时间复杂度会受到元素位置的影响，例如，使用add(T)方法插入元素时，会自动将新元素追加到数组末尾，但如果指定新元素的下标位置add(T,i)，时间复杂度则为O(n-i)，因此会导致插入时间边长。
+
+      - LInkedLIst使用链表作为底层数据结构，如果add(T)方法的插入，，时间复杂度都近似O(1)。如果是需要指定插入位置，则时间复杂度为O(n)。因为需要先移动到指定位置再插入。
+
+    - 是否支持高速随机访问
+
+      - LInkedList不支持高效的随机元素访问，而ArrayList支持，因为只需要通过元素的序号(下标)，即可快速访问元素对象
+
+    - 内存空间占用：
+
+      - ArrayList的空间使用和LinkedList相比的话，ArrayList的结尾会有一定的空间浪费，因为ArrayLIst需要预留一定空间用于存储新元素，而LInkedList则每一个元素都需要花费更多的空间来存放前一个节点和后一个节点的位置。各有不同
+
+    - ###### 双向链表和双向循环链表
+
+      - > 双向链表：即每个链表节点包含两个指针，一个指向前一个元素节点，一个指向后一个元素节点
+
+      - > 双向循环链表，与双向链表类似，不过双向循环链表的第一个元素和最后一个元素都分别指向了对方，即末尾的元素指向了第一个元素，而第一个元素也指向了最后一个元素，形成闭环
+
+- ###### Collection子接口之set
+
+  - 无序性和不可重复性的含义是什么
+    - 什么是无序性，无序性不等于随机性，无序性指存储数据时并非按照数组的索引顺序添加，而是按照数据的哈希值来确定的
+    - 什么是不可重复性？不可重复性是指添加元素按照equals()判断时，返回false，需要同时重写equals方法和hashCode方法。
+  - 比较HashSet、LinkedHashSet、和treeSet三者的区别
+    - HashSet是Set接口的主要实现类，HashSet的底层是HashMap，线程不安全，可以存储null值
+    - LInkedHashSet是HashSet的子类，能够按照添加的顺序遍历
+    - TreeSet底层使用红黑树，能够按照添加元素的顺序进行遍历，排序的方式有自然排序和定制排序
+
+- ###### Map接口
+
+  - HashMap和HashTable的区别
+    - 线程安全：HashMap是非线程安全的，HashTable是线程安全的，HashTable的内部方法基本都经过syncchronized修饰（如果需要使用线程安全的Map集合，建议使用ConcurrentHashMap，个人认为，HashTable的所有方法都经过syncchronized修饰，性能不如ConcurrentHashMap）
+    - 效率：因为线程安全的问题，HashMap要比HashTable效率高一些，日常使用中HashTable也很少使用，基本被淘汰
+    - 对null和nullvalue的支持，HashMap可以存储null的key和value，但是null作为key只能存在一个，null作为值可以存在多个，HashTable不允许有null的key和value，否则会抛出NUllPointerException
+    - 初始容量大小和每次扩容大小的不同：
+      - 创建时如果不指定初始容量，HashTable的初始容量为11，之后每次扩充，容量会变为原来的2n+1，HashTable默认容量为16，之后每次扩充，容量会变为原来的两倍
+      - 创建时如果给定了初始容量。hashTable就直接使用给定的容量大小，HashMap会扩充为2的幂次方大小，也就是说HashMap总是使用2的幂作为哈希表的大小，后面会介绍为什么是2的幂次方
+      - 底层数据结构：JDK8以后HashMap在解决哈希冲突时有了较大的变化，当链表长度大于阈值并且数组的长度大于64(如果小于64会先进行扩容)时，会将链表转换为红黑树，以此来减少搜索时间
+  - HashMap和HashSet的区别
+    - HashSet的底层是基于HashMap实现的，除了clone、writeObject、readObject是hashSet自己必须实现的，其他方法都是直接调用hashMap中的方法
+  - HashMap和TreeMap的区别
+    - 两者都继承自AbstractMap，但treeMap还实现了NavigableMap接口和SortedMap接口
+
+- HashMap的底层实现
+
+  - JDK8之前，HashMap底层是数组和链表结合在一起使用，也就是链表散列，hashMap通过key的hashcode经过扰动函数处理过后得到Hash值，然后通过(n-1)&hash判断当前元素存在的位置（这里的n指数组的长度），如果当前位置存在元素的话，判断要存入的元素的keyhash和hash是否相同，如果相同直接覆盖，如果不同就通过拉链法解决冲突
+    - 所谓扰动函数，就是hashMap的hash方法，使用hash方法也就是扰动函数，是为了防止一些实现比较差的hashCode（），等于说使用扰动函数可以减少hash碰撞
+    - 所谓拉链法：拉链法即创建一个链表数组，数组的元素是链表，如果有重复hash的key，就将元素追加到链表中
+  - JDK8之后：在JDK8之后，如果由于hash碰撞导致链表长度大于阈值(默认阈值为8)，(在转换为红黑树之前会先判断数组的长度是否大于64，如果不大于则会先进行数组扩容)则会将链表转换为红黑树，以此减少搜索时间
+  - HashMap的长度为什么是2的幂次方
+    - 为了能够让hashMap存取高效，尽量减少碰撞，也就是尽量要把数据分配均匀。hash值的范围值-2147483648到2147483648，所以只要hash函数映射的比较均匀松散，就会很少出现hash碰撞的情况。不过这个长度40亿左右的数组，内存是放不下的，所以这个散列值不能直接拿来使用，使用前需要做对数组的长度取模运算，才能够得到数组的下标，计算方法为：(n - 1) & hash
+  - HashMap多线程操作导致的死循环问题
+    - 1.7之前在并发下rehash会造成元素之间的循环链表，jdk1.8之后解决了这个问题，不过依旧不推荐使用hashmap在多线程场景使用，可能会造成数据丢失等其他的问题。
+
+- ConcurrentHashMap和Hashtable的区别
+
+  - 底层数据结构：
+    - jdk1.7的concurrentHashMap底层采用分段的数组和链表实现，1.8采用的数据结构跟hashMap1.8的结构一致，HashTable和jdk1.8之前的hashMap的底层数据结构都是采用数组+链表的形式，数组是hashMap的主体，链表则是主要为了解决哈希冲突而存在的。
+  - 实现线程安全的方式
+    - 1.7之前concurrentHashMap使用了分段锁，对整个数据桶进行了分割分段，每一把锁只锁其中的一部分数据，多线程场景下不同线程放问不同数据时就不会存在锁竞争或者说大大减少了锁竞争的情况出现，提高了并发的访问率，1.8以后concurrentHashMap掘弃了Segment的概念，直接使用了Node数组和链表+红黑树的数据结构来实现，并发控制使用synchronized和CAS来操作，synchronized只锁定当前链表和红黑二叉树的首节点，这样只要hash不冲突就不会产生并发，效率大大提升。整个看起来像是优化过并且线程安全的HashMap。
+    - hashTable仅仅使用了synchronized来保证线程安全，效率非常低下，当一个线程放问同步方法时，其他线程也访问，就会进入阻塞或者轮询状态，所以效率非常低。
