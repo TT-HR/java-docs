@@ -37,3 +37,6 @@ RocketMQ 集群部署模式
 - 多master模式：多个master节点组成的集群，单个master重启对应用没有影响，但是未被消费的消息在节点恢复之前不可用
 - 多master多slave：maseter写slave读，未被消费的消息可以从slave消费。主从节点同步方式可能出现消息丢失
 - 多maseer多slave同步双写：解决上面所有问题，发送消息时间变长。同步刷盘性能较低
+
+rocketmq防止消息丢失
+- 同步刷盘模式
