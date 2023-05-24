@@ -1,3 +1,7 @@
+注入的几种方式
+- set注入
+- 构造器注入
+- 注解的注入
 springboot自动装配
   - 在@springbootApplication注解中有@enableAutoconfiguration负责自动装配
   - 是在meta-info/spring.configuration中存储了配置，需要在pom中使用相关starter注解即可使相关自动装配生效
