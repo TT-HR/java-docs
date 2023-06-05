@@ -12,3 +12,9 @@ springboot自动装配
 - 分为编程式事务和声明式事务
 - 编程式事务指硬编码的方式在业务中使用事务
 - 声明式事务建立在aop之上的，本质是对方法前后进行拦截
+
+spring bean的生命周期
+- 实例化
+- 属性赋值
+- 初始化（Aware接口的依赖注入，BeanPostProcessor在初始化前后的处理，以及初始化操作）
+- 销毁（通过disposableBean和destory——method销毁）
