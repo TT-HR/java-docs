@@ -40,7 +40,8 @@ spring启动流程
 - 。。。
 
 springboot启动流程
-https://juejin.cn/post/7035910505810100255
+
+详细https://juejin.cn/post/7035910505810100255
 - 启动入口包含@springbootAppliaction注解内多个注解（配置，自动装配，扫描）
 - 构造方法
   - 判断当前程序类型（是否web程序）
