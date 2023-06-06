@@ -53,3 +53,8 @@ springboot启动流程
   - refresh方法贯穿bean的生命周期。执行bean生命周期前后置方法
   - 处理了spring注解标注的类
   - onRefresh通过java代码构建出tomcat容器并启动
+
+springsecurity动态权限
+- 在数据查找你访问的url需要什么角色，判断是否与自己登录的角色相同
+- 请求时找到登录账号的角色，security拿到请求的路径去寻找包含这个url的角色，然后对比
+
