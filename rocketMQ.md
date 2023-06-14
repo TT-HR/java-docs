@@ -12,3 +12,12 @@ rocketmq防止消息丢失
 - 增加消费者
 - 关注单个消费者消费情况，提高单个消费能力
 - mq的堆积监控告警
+
+rocketMq和kafaka
+- rocketMQ数据可靠性高，支持同步刷盘
+- kafaka写入性能强，主要用于日志场景。rocketMQ倾向于业务
+- rocketMQ使用长轮询，消息延迟低
+- rocketMQ消费失败重试机制
+- rocketMQ能保证全局顺序消费
+- rocketMQ支持分布式事务消息
+- rocketMQ支持消息查询
