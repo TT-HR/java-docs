@@ -39,3 +39,4 @@ static 修饰
 - 成员变量
 - 静态变量 方法区
 - 实例变量 堆 
+![Uploading image.png…]()
