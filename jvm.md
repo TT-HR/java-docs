@@ -39,4 +39,5 @@ static 修饰
 - 成员变量
 - 静态变量 方法区
 - 实例变量 堆 
-![Uploading image.png…]()
+<br>
+<img width="1009" height="618" alt="image" src="https://github.com/user-attachments/assets/8e26daf4-eadc-4ced-b1a8-eb24f7e6b344" />
